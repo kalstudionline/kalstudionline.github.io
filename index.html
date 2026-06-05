@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cudio Ai - Business Research Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid #2a2a4a;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header p { color: #888; font-size: 1.1em; }
+        .card {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        .card h2 { margin-bottom: 20px; color: #00d2ff; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .pricing-card {
+            background: #0a0a1a;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .pricing-card.featured {
+            border-color: #7b2ff7;
+            position: relative;
+        }
+        .pricing-card.featured::before {
+            content: "BEST VALUE";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #fff;
+        }
+        .pricing-card .price { font-size: 1.8em; font-weight: bold; color: #fff; margin: 15px 0; }
+        .pricing-card ul { list-style: none; text-align: left; margin: 15px 0; }
+        .pricing-card ul li { padding: 6px 0; color: #aaa; }
+        .pricing-card ul li::before { content: "✓  "; color: #00d26a; }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+            color: #fff;
+            width: 100%;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-box {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .feature-box h3 { color: #fff; margin-bottom: 8px; }
+        .feature-box p { color: #888; font-size: 0.9em; }
+        .payment-box {
+            background: #0a0a1a;
+            border: 2px solid #00d2ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .payment-box h3 { color: #00d2ff; margin-bottom: 10px; }
+        .payment-box .big-price { font-size: 2em; color: #fff; font-weight: bold; }
+        .upi-id {
+            background: #1a1a2e;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.2em;
+            color: #7b2ff7;
+            display: inline-block;
+            margin: 10px 0;
+            user-select: all;
+        }
+        .contact-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #0a0a1a;
+            border-radius: 8px;
+        }
+        .contact-info a { color: #00d2ff; text-decoration: none; }
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #555;
+            font-size: 0.85em;
+        }
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+        .step .num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+        .sample-link {
+            color: #7b2ff7;
+            text-decoration: none;
+            border-bottom: 1px dashed #7b2ff7;
+        }
+        @media (max-width: 600px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cudio Ai</h1>
+            <p>AI-Powered Business Research & Lead Generation</p>
+            <p style="color:#666;margin-top:5px;font-size:0.9em;">Get qualified leads & market insights -- researched by AI, delivered to you</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-box">
+                <h3>Targeted Leads</h3>
+                <p>Get qualified business contacts in your niche</p>
+            </div>
+            <div class="feature-box">
+                <h3>Market Research</h3>
+                <p>Deep analysis of competitors & opportunities</p>
+            </div>
+            <div class="feature-box">
+                <h3>Fast Delivery</h3>
+                <p>Custom reports delivered within 24 hours</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>How It Works</h2>
+            <div class="how-it-works">
+                <div class="step">
+                    <div class="num">1</div>
+                    <p>Share your requirements (industry, location, type of leads)</p>
+                </div>
+                <div class="step">
+                    <div class="num">2</div>
+                    <p>Pay via UPI to the ID below</p>
+                </div>
+                <div class="step">
+                    <div class="num">3</div>
+                    <p>AI researches and compiles your report</p>
+                </div>
+                <div class="step">
+                    <div class="num">4</div>
+                    <p>Delivered to you within 24 hours</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Choose Your Service</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Lead List</h3>
+                    <div class="price">Rs 199</div>
+                    <ul>
+                        <li>100-150 qualified leads</li>
+                        <li>Company names & websites</li>
+                        <li>Contact research</li>
+                        <li>Industry niche targeting</li>
+                        <li>CSV format delivery</li>
+                    </ul>
+                    <div class="payment-box">
+                        <p>Pay via UPI</p>
+                        <div class="big-price">Rs 199</div>
+                        <div class="upi-id" id="upi-leads">Your-UPI-ID</div>
+                        <p style="color:#888;font-size:0.85em;margin-top:8px;">Send payment with your order details</p>
+                    </div>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Market Research</h3>
+                    <div class="price">Rs 499</div>
+                    <ul>
+                        <li>Complete market analysis</li>
+                        <li>Competitor breakdown</li>
+                        <li>Opportunity mapping</li>
+                        <li>Trend identification</li>
+                        <li>PDF report delivery</li>
+                    </ul>
+                    <div class="payment-box">
+                        <p>Pay via UPI</p>
+                        <div class="big-price">Rs 499</div>
+                        <div class="upi-id" id="upi-research">Your-UPI-ID</div>
+                        <p style="color:#888;font-size:0.85em;margin-top:8px;">Send payment with your order details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Contact & Order</h2>
+            <div style="text-align:center;">
+                <p style="margin-bottom:15px;">After payment, send your details (industry, location, requirements) to receive your report.</p>
+                <div class="contact-info">
+                    <p>Telegram: <strong style="color:#7b2ff7;">@cudio_ai_bot</strong></p>
+                    <p style="margin-top:8px;color:#666;">Or send an order request and we will respond</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-color:#2a2a4a;">
+            <h2>Free Sample</h2>
+            <p style="color:#aaa;margin-bottom:15px;">Want to see quality first? Check our sample lead list.</p>
+            <p style="color:#888;">Sample: 10 verified digital marketing agencies in India with details.</p>
+            <div style="margin-top:15px;background:#0a0a1a;padding:15px;border-radius:8px;font-size:0.9em;line-height:1.6;">
+                <p style="color:#7b2ff7;font-weight:bold;">Digital Marketing Agencies - India Sample</p>
+                <ol style="margin:10px 0 0 20px;color:#aaa;">
+                    <li>GrowthX Labs - Mumbai - growthx.in</li>
+                    <li>FoxyMoron - Mumbai - foxyMoron.com</li>
+                    <li>WATConsult - Mumbai - watconsult.com</li>
+                    <li>Gozoop - Mumbai - gozoop.com</li>
+                    <li>Social Beat - Chennai - socialbeat.in</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Cudio Ai - AI-Powered Business Research</p>
+        </div>
+    </div>
+</body>
+</html>
