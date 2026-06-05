@@ -3,282 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cudio Ai - Business Research Tool</title>
+    <title>Cudio Ai — Business Research & Lead Generation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0a0a0f;
+            --card: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e8;
+            --muted: #6b6b80;
+            --accent-1: #6c5ce7;
+            --accent-2: #00cec9;
+            --gradient: linear-gradient(135deg, #6c5ce7, #00cec9);
+            --gradient-glow: linear-gradient(135deg, rgba(108,92,231,0.2), rgba(0,206,201,0.2));
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
-            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             min-height: 100vh;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .header {
-            text-align: center;
-            padding: 40px 0 30px;
-            border-bottom: 1px solid #2a2a4a;
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
-        .header h1 {
-            font-size: 2.5em;
-            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.4em;
+            font-weight: 800;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
-        .header p { color: #888; font-size: 1.1em; }
-        .card {
-            background: #1a1a2e;
-            border: 1px solid #2a2a4a;
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: var(--gradient-glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(108,92,231,0.15);
+            border: 1px solid rgba(108,92,231,0.3);
+            color: #a29bfe;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15em;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(108,92,231,0.5);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-2px);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 60px 0;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat .number {
+            font-size: 2em;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat .label {
+            color: var(--muted);
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        /* How it works */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 48px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step-card {
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 30px;
-            margin: 30px 0;
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+            transition: border-color 0.3s;
         }
-        .card h2 { margin-bottom: 20px; color: #00d2ff; }
+
+        .step-card:hover {
+            border-color: var(--accent-1);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+
+        /* Pricing */
         .pricing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
         }
+
         .pricing-card {
-            background: #0a0a1a;
-            border: 1px solid #2a2a4a;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-        }
-        .pricing-card.featured {
-            border-color: #7b2ff7;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 32px;
             position: relative;
+            transition: all 0.3s;
         }
+
+        .pricing-card:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-1);
+            background: linear-gradient(135deg, rgba(108,92,231,0.05), rgba(0,206,201,0.05));
+        }
+
         .pricing-card.featured::before {
-            content: "BEST VALUE";
+            content: 'Popular';
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
-            padding: 4px 16px;
-            border-radius: 20px;
+            background: var(--gradient);
+            padding: 4px 20px;
+            border-radius: 100px;
             font-size: 0.75em;
-            font-weight: bold;
-            color: #fff;
-        }
-        .pricing-card .price { font-size: 1.8em; font-weight: bold; color: #fff; margin: 15px 0; }
-        .pricing-card ul { list-style: none; text-align: left; margin: 15px 0; }
-        .pricing-card ul li { padding: 6px 0; color: #aaa; }
-        .pricing-card ul li::before { content: "✓  "; color: #00d26a; }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
             font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
             color: #fff;
-            width: 100%;
+            letter-spacing: 0.05em;
         }
-        .btn-primary:hover { transform: translateY(-2px); }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+
+        .pricing-card .plan-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
-        .feature-box {
-            background: #1a1a2e;
-            border: 1px solid #2a2a4a;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
+
+        .pricing-card .plan-desc {
+            color: var(--muted);
+            font-size: 0.9em;
+            margin-bottom: 24px;
         }
-        .feature-box h3 { color: #fff; margin-bottom: 8px; }
-        .feature-box p { color: #888; font-size: 0.9em; }
-        .payment-box {
-            background: #0a0a1a;
-            border: 2px solid #00d2ff;
-            border-radius: 12px;
-            padding: 24px;
-            margin: 20px 0;
-            text-align: center;
+
+        .pricing-card .price {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin-bottom: 24px;
         }
-        .payment-box h3 { color: #00d2ff; margin-bottom: 10px; }
-        .payment-box .big-price { font-size: 2em; color: #fff; font-weight: bold; }
-        .upi-id {
-            background: #1a1a2e;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 1.2em;
-            color: #7b2ff7;
-            display: inline-block;
-            margin: 10px 0;
-            user-select: all;
+
+        .pricing-card .price .currency {
+            font-size: 0.4em;
+            font-weight: 500;
+            vertical-align: super;
+            color: var(--muted);
         }
-        .contact-info {
-            margin-top: 15px;
-            padding: 15px;
-            background: #0a0a1a;
-            border-radius: 8px;
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
         }
-        .contact-info a { color: #00d2ff; text-decoration: none; }
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            color: #555;
-            font-size: 0.85em;
-        }
-        .how-it-works {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .step {
-            text-align: center;
-            padding: 20px;
-        }
-        .step .num {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00d2ff, #7b2ff7);
+
+        .features-list li {
+            padding: 8px 0;
+            font-size: 0.9em;
+            color: var(--muted);
             display: flex;
             align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gradient);
+            flex-shrink: 0;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
             justify-content: center;
-            font-weight: bold;
-            margin: 0 auto 10px;
         }
-        .sample-link {
-            color: #7b2ff7;
-            text-decoration: none;
-            border-bottom: 1px dashed #7b2ff7;
+
+        /* Sample Section */
+        .sample-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        @media (max-width: 600px) {
+
+        .sample-card h3 {
+            margin-bottom: 16px;
+            color: var(--accent-2);
+        }
+
+        .sample-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        .sample-table th {
+            text-align: left;
+            padding: 10px 12px;
+            color: var(--muted);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85em;
+        }
+
+        .sample-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sample-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+
+        .faq-item h4 {
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .faq-item p {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .steps { grid-template-columns: 1fr 1fr; }
             .pricing-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8em; }
+            .stats { grid-template-columns: 1fr; gap: 20px; }
+            .nav-links { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .steps { grid-template-columns: 1fr; }
+            .hero { padding: 60px 0 40px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Cudio Ai</h1>
-            <p>AI-Powered Business Research & Lead Generation</p>
-            <p style="color:#666;margin-top:5px;font-size:0.9em;">Get qualified leads & market insights -- researched by AI, delivered to you</p>
-        </div>
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">Cudio</div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#sample">Sample</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </nav>
 
-        <div class="features">
-            <div class="feature-box">
-                <h3>Targeted Leads</h3>
-                <p>Get qualified business contacts in your niche</p>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-badge">AI-Powered Research</div>
+            <h1>Business leads & research<br><span>on demand</span></h1>
+            <p>Stop spending hours searching. Get 100-150 qualified leads or a complete market analysis delivered to you within 24 hours.</p>
+            <div class="hero-cta">
+                <a href="#pricing" class="btn btn-primary">View Plans</a>
+                <a href="#sample" class="btn btn-secondary">See Sample</a>
             </div>
-            <div class="feature-box">
-                <h3>Market Research</h3>
-                <p>Deep analysis of competitors & opportunities</p>
-            </div>
-            <div class="feature-box">
-                <h3>Fast Delivery</h3>
-                <p>Custom reports delivered within 24 hours</p>
-            </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>How It Works</h2>
-            <div class="how-it-works">
-                <div class="step">
-                    <div class="num">1</div>
-                    <p>Share your requirements (industry, location, type of leads)</p>
-                </div>
-                <div class="step">
-                    <div class="num">2</div>
-                    <p>Pay via UPI to the ID below</p>
-                </div>
-                <div class="step">
-                    <div class="num">3</div>
-                    <p>AI researches and compiles your report</p>
-                </div>
-                <div class="step">
-                    <div class="num">4</div>
-                    <p>Delivered to you within 24 hours</p>
-                </div>
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="number">24h</div>
+                <div class="label">Average delivery time</div>
+            </div>
+            <div class="stat">
+                <div class="number">100-150</div>
+                <div class="label">Leads per report</div>
+            </div>
+            <div class="stat">
+                <div class="number">100%</div>
+                <div class="label">Custom research</div>
             </div>
         </div>
 
-        <div class="card">
-            <h2>Choose Your Service</h2>
+        <!-- How It Works -->
+        <section class="section" id="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-sub">Four simple steps to get your leads or research</p>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Tell us your niche</h3>
+                    <p>Industry, location, type of leads — whatever you need</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Pay & place order</h3>
+                    <p>Secure payment via Dodo Payments. Your order is confirmed instantly</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>AI research runs</h3>
+                    <p>We research and compile your custom report with verified data</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Get your report</h3>
+                    <p>Delivered to your email within 24 hours. Ready to use</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="section" id="pricing">
+            <h2 class="section-title">Simple Pricing</h2>
+            <p class="section-sub">No subscriptions. Pay once, get your data.</p>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Lead List</h3>
-                    <div class="price">Rs 199</div>
-                    <ul>
+                    <div class="plan-name">Lead List</div>
+                    <div class="plan-desc">Qualified contacts in your niche</div>
+                    <div class="price"><span class="currency">Rs</span> 199</div>
+                    <ul class="features-list">
                         <li>100-150 qualified leads</li>
                         <li>Company names & websites</li>
                         <li>Contact research</li>
-                        <li>Industry niche targeting</li>
                         <li>CSV format delivery</li>
+                        <li>24 hour turnaround</li>
                     </ul>
-                    <div class="payment-box">
-                        <p>Pay via UPI</p>
-                        <div class="big-price">Rs 199</div>
-                        <div class="upi-id" id="upi-leads">Your-UPI-ID</div>
-                        <p style="color:#888;font-size:0.85em;margin-top:8px;">Send payment with your order details</p>
-                    </div>
+                    <a href="#" class="btn btn-primary" onclick="alert('Dodo Payments link coming soon!')">Buy Now</a>
                 </div>
                 <div class="pricing-card featured">
-                    <h3>Market Research</h3>
-                    <div class="price">Rs 499</div>
-                    <ul>
+                    <div class="plan-name">Market Research</div>
+                    <div class="plan-desc">Deep analysis of your market</div>
+                    <div class="price"><span class="currency">Rs</span> 499</div>
+                    <ul class="features-list">
                         <li>Complete market analysis</li>
                         <li>Competitor breakdown</li>
                         <li>Opportunity mapping</li>
                         <li>Trend identification</li>
                         <li>PDF report delivery</li>
                     </ul>
-                    <div class="payment-box">
-                        <p>Pay via UPI</p>
-                        <div class="big-price">Rs 499</div>
-                        <div class="upi-id" id="upi-research">Your-UPI-ID</div>
-                        <p style="color:#888;font-size:0.85em;margin-top:8px;">Send payment with your order details</p>
-                    </div>
+                    <a href="#" class="btn btn-primary" onclick="alert('Dodo Payments link coming soon!')">Buy Now</a>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>Contact & Order</h2>
-            <div style="text-align:center;">
-                <p style="margin-bottom:15px;">After payment, send your details (industry, location, requirements) to receive your report.</p>
-                <div class="contact-info">
-                    <p>Telegram: <strong style="color:#7b2ff7;">@cudio_ai_bot</strong></p>
-                    <p style="margin-top:8px;color:#666;">Or send an order request and we will respond</p>
+        <!-- Sample -->
+        <section class="section" id="sample">
+            <h2 class="section-title">Sample Data</h2>
+            <p class="section-sub">See the quality before you buy</p>
+            <div class="sample-card">
+                <h3>Digital Marketing Agencies — India (Sample)</h3>
+                <table class="sample-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GrowthX Labs</td><td>Mumbai</td><td>growthx.in</td></tr>
+                        <tr><td>FoxyMoron</td><td>Mumbai</td><td>foxyMoron.com</td></tr>
+                        <tr><td>WATConsult</td><td>Mumbai</td><td>watconsult.com</td></tr>
+                        <tr><td>Social Beat</td><td>Chennai</td><td>socialbeat.in</td></tr>
+                        <tr><td>AdLift</td><td>Gurgaon</td><td>adlift.com</td></tr>
+                    </tbody>
+                </table>
+                <p style="color:var(--muted);font-size:0.85em;margin-top:16px;">Full reports include 100-150 verified leads with deeper contact research.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq">
+            <h2 class="section-title">FAQ</h2>
+            <p class="section-sub">Common questions answered</p>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>What kind of leads do I get?</h4>
+                    <p>Every lead list is custom-researched for your specific industry and location. You get company names, websites, and contact research where available.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How fast is delivery?</h4>
+                    <p>Most reports are delivered within 24 hours. Complex requests may take up to 48 hours.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How do I receive my report?</h4>
+                    <p>Reports are delivered via email in CSV (lead lists) or PDF (market research) format.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is payment secure?</h4>
+                    <p>Yes. All payments are processed securely through Dodo Payments. Your payment info never touches our servers.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I get a refund?</h4>
+                    <p>If we can't deliver the research you requested, we'll issue a full refund. We stand by our work.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card" style="border-color:#2a2a4a;">
-            <h2>Free Sample</h2>
-            <p style="color:#aaa;margin-bottom:15px;">Want to see quality first? Check our sample lead list.</p>
-            <p style="color:#888;">Sample: 10 verified digital marketing agencies in India with details.</p>
-            <div style="margin-top:15px;background:#0a0a1a;padding:15px;border-radius:8px;font-size:0.9em;line-height:1.6;">
-                <p style="color:#7b2ff7;font-weight:bold;">Digital Marketing Agencies - India Sample</p>
-                <ol style="margin:10px 0 0 20px;color:#aaa;">
-                    <li>GrowthX Labs - Mumbai - growthx.in</li>
-                    <li>FoxyMoron - Mumbai - foxyMoron.com</li>
-                    <li>WATConsult - Mumbai - watconsult.com</li>
-                    <li>Gozoop - Mumbai - gozoop.com</li>
-                    <li>Social Beat - Chennai - socialbeat.in</li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Cudio Ai - AI-Powered Business Research</p>
-        </div>
+        <!-- Footer -->
+        <footer>
+            <p>Cudio Ai &mdash; AI-Powered Business Research</p>
+        </footer>
     </div>
 </body>
 </html>
